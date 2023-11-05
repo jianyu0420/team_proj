@@ -15,5 +15,11 @@ public interface UserMapper {
     @Autowired
     List<User> queryAll();
 
-    User selectByName(String uname,String password);
+    User selectByNP(String phonenum,String password);
+    User selectByPhone(String phonenum);
+
+    User selectByName(String uname);
+
+    int register(String uname,String password,String phonenum);
+
 }

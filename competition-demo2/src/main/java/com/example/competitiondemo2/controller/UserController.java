@@ -26,8 +26,14 @@ public class UserController {
     }
 
     @GetMapping("/byNP")
-    public User selectByName(String uname,String password){
-        User user = userService.selectByName(uname,password);
+    public User selectByNP(String uname,String password){
+        User user = userService.selectByNP(uname,password);
+        return user;
+    }
+
+    @GetMapping("/byPhone")
+    public User selectByName(String phonenum){
+        User user = userService.selectByPhone(phonenum);
         return user;
     }
 
@@ -40,8 +46,15 @@ public class UserController {
 
     @PostMapping("/loginCheck")
     @ResponseBody
-    public Result login(String uname,String password,HttpServletResponse response){
-        Result result =  userService.loginCheck(uname,password,response);
+    public Result login(String phonenum,String password,HttpServletResponse response){
+        Result result =  userService.loginCheck(phonenum,password,response);
+        return result;
+    }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public Result register(String uname,String password,String phonenum){
+        Result result = userService.register(uname, password, phonenum);
         return result;
     }
 

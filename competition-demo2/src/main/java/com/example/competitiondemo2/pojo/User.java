@@ -9,6 +9,10 @@ public class User implements Serializable {
 
     private String password;
 
+    private String phonenum;
+
+
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUid() {
@@ -29,6 +33,14 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPhonenum() {
+        return phonenum;
+    }
+
+    public void setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
     }
 
     public void setPassword(String password) {

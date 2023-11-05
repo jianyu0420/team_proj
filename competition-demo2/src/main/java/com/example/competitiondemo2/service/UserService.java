@@ -15,7 +15,13 @@ public interface UserService {
     int insertSelective(User record) ;
 
     List<User> queryAll();
-    User selectByName(String uname,String password);
+    User selectByNP(String uname,String password);
 
-    Result loginCheck(String uname,String password, HttpServletResponse response);
+    Result loginCheck(String phonenum,String password, HttpServletResponse response);
+
+    User selectByPhone(String phonenum);
+
+    User selectByName(String uname);
+
+    Result register(String uname,String password,String phonenum);
 }

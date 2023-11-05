@@ -5,11 +5,12 @@
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="uname" jdbcType="VARCHAR" property="uname" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phonenum" jdbcType="VARCHAR" property="phonenum" />
   </resultMap>
   <insert id="insert" parameterType="com.example.competitiondemo2.pojo.User">
-    insert into user (uid, uname, password
+    insert into user (uid, uname, password,phonenum
       )
-    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}
       )
   </insert>
 
@@ -17,9 +18,24 @@
     select * from user
   </select>
 
-  <select id="selectByName" resultType="User">
-    select * from user where uname = #{uname,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  <select id="selectByPhone" resultType="User">
+    select * from user where phonenum = #{phonenum,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByNP" resultType="User">
+    select * from user where phonenum = #{phonenum,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultType="User">
+    select * from user where uname = #{uname,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="register">
+    insert into user ( uname, password,phonenum
+    )
+    values (#{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}
+           )
+  </insert>
 
 
 </mapper>
