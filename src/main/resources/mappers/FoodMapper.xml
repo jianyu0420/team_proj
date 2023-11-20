@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.FoodMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.Food">
+    <id column="food_id" jdbcType="INTEGER" property="foodId" />
+    <result column="cookName" jdbcType="VARCHAR" property="cookname" />
+    <result column="editor" jdbcType="VARCHAR" property="editor" />
+    <result column="foodName" jdbcType="VARCHAR" property="foodname" />
+    <result column="from" jdbcType="VARCHAR" property="from" />
+    <result column="food_type_id" jdbcType="INTEGER" property="foodTypeId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.competitiondemo2.pojo.Food">
+    <result column="cookDetail" jdbcType="LONGVARCHAR" property="cookdetail" />
+    <result column="cookPic" jdbcType="LONGVARCHAR" property="cookpic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    food_id, cookName, editor, foodName, from, food_type_id
+  </sql>
+  <sql id="Blob_Column_List">
+    cookDetail, cookPic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from health1..food
+    where food_id = #{foodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..food
+    where food_id = #{foodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.Food">
+    insert into health1..food (food_id, cookName, editor, 
+      foodName, from, food_type_id, 
+      cookDetail, cookPic)
+    values (#{foodId,jdbcType=INTEGER}, #{cookname,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
+      #{foodname,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, #{foodTypeId,jdbcType=INTEGER}, 
+      #{cookdetail,jdbcType=LONGVARCHAR}, #{cookpic,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.Food">
+    insert into health1..food
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="foodId != null">
+        food_id,
+      </if>
+      <if test="cookname != null">
+        cookName,
+      </if>
+      <if test="editor != null">
+        editor,
+      </if>
+      <if test="foodname != null">
+        foodName,
+      </if>
+      <if test="from != null">
+        from,
+      </if>
+      <if test="foodTypeId != null">
+        food_type_id,
+      </if>
+      <if test="cookdetail != null">
+        cookDetail,
+      </if>
+      <if test="cookpic != null">
+        cookPic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="foodId != null">
+        #{foodId,jdbcType=INTEGER},
+      </if>
+      <if test="cookname != null">
+        #{cookname,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="foodname != null">
+        #{foodname,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="foodTypeId != null">
+        #{foodTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cookdetail != null">
+        #{cookdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cookpic != null">
+        #{cookpic,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.Food">
+    update health1..food
+    <set>
+      <if test="cookname != null">
+        cookName = #{cookname,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="foodname != null">
+        foodName = #{foodname,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        from = #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="foodTypeId != null">
+        food_type_id = #{foodTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cookdetail != null">
+        cookDetail = #{cookdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cookpic != null">
+        cookPic = #{cookpic,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where food_id = #{foodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.competitiondemo2.pojo.Food">
+    update health1..food
+    set cookName = #{cookname,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      foodName = #{foodname,jdbcType=VARCHAR},
+      from = #{from,jdbcType=VARCHAR},
+      food_type_id = #{foodTypeId,jdbcType=INTEGER},
+      cookDetail = #{cookdetail,jdbcType=LONGVARCHAR},
+      cookPic = #{cookpic,jdbcType=LONGVARCHAR}
+    where food_id = #{foodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.Food">
+    update health1..food
+    set cookName = #{cookname,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      foodName = #{foodname,jdbcType=VARCHAR},
+      from = #{from,jdbcType=VARCHAR},
+      food_type_id = #{foodTypeId,jdbcType=INTEGER}
+    where food_id = #{foodId,jdbcType=INTEGER}
+  </update>
+</mapper>

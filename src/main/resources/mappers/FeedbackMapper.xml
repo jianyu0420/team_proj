@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.FeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.Feedback">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="u_id" jdbcType="INTEGER" property="u_id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="feedback_time" jdbcType="TIMESTAMP" property="feedback_time" />
+  </resultMap>
+
+  <select id="selectByUid" resultType="Feedback">
+    select * from feedback where u_id=#{uid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultType="Feedback">
+    select * from feedback
+  </select>
+
+  <insert id="addFeedBack">
+    insert into feedback ( u_id, content,feedback_time
+    )
+    values (#{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+           )
+  </insert>
+
+</mapper>

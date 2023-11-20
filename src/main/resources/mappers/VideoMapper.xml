@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.Video">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="video_type_id" jdbcType="INTEGER" property="videoTypeId" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="view" jdbcType="INTEGER" property="view" />
+    <result column="up" jdbcType="VARCHAR" property="up" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="createDate" jdbcType="VARCHAR" property="createdate" />
+    <result column="from" jdbcType="VARCHAR" property="from" />
+    <result column="smallType" jdbcType="VARCHAR" property="smalltype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    video_id, title, url, video_type_id, pic, view, up, time, createDate, from, smallType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health1..video
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..video
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.Video">
+    insert into health1..video (video_id, title, url, 
+      video_type_id, pic, view, 
+      up, time, createDate, 
+      from, smallType)
+    values (#{videoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{videoTypeId,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, 
+      #{up,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, 
+      #{from,jdbcType=VARCHAR}, #{smalltype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.Video">
+    insert into health1..video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="videoTypeId != null">
+        video_type_id,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+      <if test="view != null">
+        view,
+      </if>
+      <if test="up != null">
+        up,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="from != null">
+        from,
+      </if>
+      <if test="smalltype != null">
+        smallType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTypeId != null">
+        #{videoTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="view != null">
+        #{view,jdbcType=INTEGER},
+      </if>
+      <if test="up != null">
+        #{up,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="smalltype != null">
+        #{smalltype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.Video">
+    update health1..video
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTypeId != null">
+        video_type_id = #{videoTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="view != null">
+        view = #{view,jdbcType=INTEGER},
+      </if>
+      <if test="up != null">
+        up = #{up,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        from = #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="smalltype != null">
+        smallType = #{smalltype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.Video">
+    update health1..video
+    set title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      video_type_id = #{videoTypeId,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR},
+      view = #{view,jdbcType=INTEGER},
+      up = #{up,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=VARCHAR},
+      from = #{from,jdbcType=VARCHAR},
+      smallType = #{smalltype,jdbcType=VARCHAR}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>

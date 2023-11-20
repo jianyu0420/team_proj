@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.Menu">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="editor" jdbcType="VARCHAR" property="editor" />
+    <result column="imgSrc" jdbcType="VARCHAR" property="imgsrc" />
+    <result column="introduct" jdbcType="VARCHAR" property="introduct" />
+    <result column="detailUrl" jdbcType="VARCHAR" property="detailurl" />
+    <result column="menu_type_id" jdbcType="INTEGER" property="menuTypeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, name, editor, imgSrc, introduct, detailUrl, menu_type_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health1..menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.Menu">
+    insert into health1..menu (menu_id, name, editor, 
+      imgSrc, introduct, detailUrl, 
+      menu_type_id)
+    values (#{menuId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
+      #{imgsrc,jdbcType=VARCHAR}, #{introduct,jdbcType=VARCHAR}, #{detailurl,jdbcType=VARCHAR}, 
+      #{menuTypeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.Menu">
+    insert into health1..menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="editor != null">
+        editor,
+      </if>
+      <if test="imgsrc != null">
+        imgSrc,
+      </if>
+      <if test="introduct != null">
+        introduct,
+      </if>
+      <if test="detailurl != null">
+        detailUrl,
+      </if>
+      <if test="menuTypeId != null">
+        menu_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="imgsrc != null">
+        #{imgsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null">
+        #{introduct,jdbcType=VARCHAR},
+      </if>
+      <if test="detailurl != null">
+        #{detailurl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuTypeId != null">
+        #{menuTypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.Menu">
+    update health1..menu
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="imgsrc != null">
+        imgSrc = #{imgsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null">
+        introduct = #{introduct,jdbcType=VARCHAR},
+      </if>
+      <if test="detailurl != null">
+        detailUrl = #{detailurl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuTypeId != null">
+        menu_type_id = #{menuTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.Menu">
+    update health1..menu
+    set name = #{name,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      imgSrc = #{imgsrc,jdbcType=VARCHAR},
+      introduct = #{introduct,jdbcType=VARCHAR},
+      detailUrl = #{detailurl,jdbcType=VARCHAR},
+      menu_type_id = #{menuTypeId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

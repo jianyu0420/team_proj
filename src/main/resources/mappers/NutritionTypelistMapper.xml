@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.NutritionTypelistMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.NutritionTypelist">
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.competitiondemo2.pojo.NutritionTypelist">
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    detail
+  </sql>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.NutritionTypelist">
+    insert into health1..nutrition_typelist (typeId, detail)
+    values (#{typeid,jdbcType=INTEGER}, #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.NutritionTypelist">
+    insert into health1..nutrition_typelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeid != null">
+        typeId,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeid != null">
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

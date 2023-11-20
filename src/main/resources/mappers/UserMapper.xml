@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="vip" jdbcType="INTEGER" property="vip" />
+    <result column="phone_num" jdbcType="CHAR" property="phoneNum" />
+    <result column="email" jdbcType="CHAR" property="email" />
+    <result column="birth" jdbcType="TIMESTAMP" property="birth" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="avator" jdbcType="VARCHAR" property="avator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+
+  </resultMap>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.User">
+    insert into user (id, username, password,phone_num
+    )
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}
+           )
+  </insert>
+
+  <select id="queryAll" resultType="User">
+    select * from user
+  </select>
+
+  <select id="selectByPhone" resultType="User">
+    select * from user where phone_num = #{phonenum,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPhoneAndPwd" resultType="User">
+    select * from user where phone_num = #{phonenum,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultType="User">
+    select * from user where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="register">
+    insert into user ( username, password,phone_num
+    )
+    values (#{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}
+           )
+  </insert>
+
+
+</mapper>

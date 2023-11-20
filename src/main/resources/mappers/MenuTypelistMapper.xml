@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.MenuTypelistMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.MenuTypelist">
+    <id column="menu_type_id" jdbcType="INTEGER" property="menuTypeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..menu_typelist
+    where menu_type_id = #{menuTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.MenuTypelist">
+    insert into health1..menu_typelist (menu_type_id)
+    values (#{menuTypeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.MenuTypelist">
+    insert into health1..menu_typelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuTypeId != null">
+        menu_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuTypeId != null">
+        #{menuTypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.VideoTypelistMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.VideoTypelist">
+    <id column="video_type_id" jdbcType="INTEGER" property="videoTypeId" />
+    <result column="bigType" jdbcType="VARCHAR" property="bigtype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    video_type_id, bigType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health1..video_typelist
+    where video_type_id = #{videoTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..video_typelist
+    where video_type_id = #{videoTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.VideoTypelist">
+    insert into health1..video_typelist (video_type_id, bigType)
+    values (#{videoTypeId,jdbcType=INTEGER}, #{bigtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.VideoTypelist">
+    insert into health1..video_typelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoTypeId != null">
+        video_type_id,
+      </if>
+      <if test="bigtype != null">
+        bigType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoTypeId != null">
+        #{videoTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bigtype != null">
+        #{bigtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.VideoTypelist">
+    update health1..video_typelist
+    <set>
+      <if test="bigtype != null">
+        bigType = #{bigtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where video_type_id = #{videoTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.VideoTypelist">
+    update health1..video_typelist
+    set bigType = #{bigtype,jdbcType=VARCHAR}
+    where video_type_id = #{videoTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

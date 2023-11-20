@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.InfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.Info">
+    <id column="info_id" jdbcType="INTEGER" property="infoId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="publicTime" jdbcType="VARCHAR" property="publictime" />
+    <result column="simpleContent" jdbcType="VARCHAR" property="simplecontent" />
+    <result column="info_type_id" jdbcType="INTEGER" property="infoTypeId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.competitiondemo2.pojo.Info">
+    <result column="mainContent" jdbcType="LONGVARCHAR" property="maincontent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    info_id, title, publicTime, simpleContent, info_type_id
+  </sql>
+  <sql id="Blob_Column_List">
+    mainContent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from health1..info
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..info
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.Info">
+    insert into health1..info (info_id, title, publicTime, 
+      simpleContent, info_type_id, mainContent
+      )
+    values (#{infoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publictime,jdbcType=VARCHAR}, 
+      #{simplecontent,jdbcType=VARCHAR}, #{infoTypeId,jdbcType=INTEGER}, #{maincontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.Info">
+    insert into health1..info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        info_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="publictime != null">
+        publicTime,
+      </if>
+      <if test="simplecontent != null">
+        simpleContent,
+      </if>
+      <if test="infoTypeId != null">
+        info_type_id,
+      </if>
+      <if test="maincontent != null">
+        mainContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publictime != null">
+        #{publictime,jdbcType=VARCHAR},
+      </if>
+      <if test="simplecontent != null">
+        #{simplecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTypeId != null">
+        #{infoTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="maincontent != null">
+        #{maincontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.Info">
+    update health1..info
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publictime != null">
+        publicTime = #{publictime,jdbcType=VARCHAR},
+      </if>
+      <if test="simplecontent != null">
+        simpleContent = #{simplecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTypeId != null">
+        info_type_id = #{infoTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="maincontent != null">
+        mainContent = #{maincontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.competitiondemo2.pojo.Info">
+    update health1..info
+    set title = #{title,jdbcType=VARCHAR},
+      publicTime = #{publictime,jdbcType=VARCHAR},
+      simpleContent = #{simplecontent,jdbcType=VARCHAR},
+      info_type_id = #{infoTypeId,jdbcType=INTEGER},
+      mainContent = #{maincontent,jdbcType=LONGVARCHAR}
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.Info">
+    update health1..info
+    set title = #{title,jdbcType=VARCHAR},
+      publicTime = #{publictime,jdbcType=VARCHAR},
+      simpleContent = #{simplecontent,jdbcType=VARCHAR},
+      info_type_id = #{infoTypeId,jdbcType=INTEGER}
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </update>
+</mapper>

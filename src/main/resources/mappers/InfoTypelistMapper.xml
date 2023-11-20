@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.competitiondemo2.mapper.InfoTypelistMapper">
+  <resultMap id="BaseResultMap" type="com.example.competitiondemo2.pojo.InfoTypelist">
+    <id column="info_list_id" jdbcType="INTEGER" property="infoListId" />
+    <result column="typeName" jdbcType="VARCHAR" property="typename" />
+    <result column="englishName" jdbcType="VARCHAR" property="englishname" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    info_list_id, typeName, englishName, count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health1..info_typelist
+    where info_list_id = #{infoListId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health1..info_typelist
+    where info_list_id = #{infoListId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.competitiondemo2.pojo.InfoTypelist">
+    insert into health1..info_typelist (info_list_id, typeName, englishName, 
+      count)
+    values (#{infoListId,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{englishname,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.competitiondemo2.pojo.InfoTypelist">
+    insert into health1..info_typelist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoListId != null">
+        info_list_id,
+      </if>
+      <if test="typename != null">
+        typeName,
+      </if>
+      <if test="englishname != null">
+        englishName,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoListId != null">
+        #{infoListId,jdbcType=INTEGER},
+      </if>
+      <if test="typename != null">
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.competitiondemo2.pojo.InfoTypelist">
+    update health1..info_typelist
+    <set>
+      <if test="typename != null">
+        typeName = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        englishName = #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where info_list_id = #{infoListId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.competitiondemo2.pojo.InfoTypelist">
+    update health1..info_typelist
+    set typeName = #{typename,jdbcType=VARCHAR},
+      englishName = #{englishname,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER}
+    where info_list_id = #{infoListId,jdbcType=INTEGER}
+  </update>
+</mapper>
